@@ -196,12 +196,12 @@ do_reboot () {
 	local	op=''
 
 	cat <<EOM > ${dialog_file}
-    --menu \\
-    "reboot or power off" \\
-    0 0 0 \\
-    Reboot "reboot (shutdown -r now)" \\
-    PowerOff "power off (shutdown -p now)" \\
-    Shutdown "shotdown (shutdown -h now)" \\
+ --menu
+ "reboot or power off"
+ 0 0 0
+ Reboot "reboot (shutdown -r now)"
+ PowerOff "power off (shutdown -p now)"
+ Shutdown "shotdown (shutdown -h now)"
 EOM
 
 	dialog --file ${dialog_file} 2> ${tmp_result}
@@ -235,14 +235,14 @@ menu_shell () {
 	local	sh=""
 
 	cat <<EOM > ${dialog_file}
-    --menu \\
-    "select shell" \\
-    0 0 0 \\
+ --menu
+ "select shell"
+ 0 0 0
 EOM
 
 	for sh in `grep '^\/' /etc/shells`
 	do
-		echo " ${sh} \"`basename ${sh}`\" \\" >> ${dialog_file}
+		echo " ${sh} \"`basename ${sh}`\"" >> ${dialog_file}
 	done
 
 	dialog --file ${dialog_file} 2> ${tmp_result}
@@ -268,24 +268,24 @@ show_env_values () {
 	local	dialog_file=${dialog_inputmenu}
 
 	cat <<EOM > ${dialog_file}
-    --title "show values" \\
-    --inputmenu \\
-    "show values" \\
-    `max_hight` `max_width` `max_hight` \\
+ --title "show values"
+ --inputmenu
+ "show values"
+ `max_hight` `max_width` `max_hight`
 EOM
 
-	echo " \"maxsize\" \"`max_hight` x `max_width`\"\\" >> ${dialog_file}
+	echo " \"maxsize\" \"`max_hight` x `max_width`\"" >> ${dialog_file}
 
-	echo " \"cmd_bcwipe\" \"${cmd_bcwipe}\"\\" >> ${dialog_file}
-	echo " \"workdir\" \"${workdir}\"\\" >> ${dialog_file}
-	echo " \"tmpdir\" \"${tmpdir}\"\\" >> ${dialog_file}
+	echo " \"cmd_bcwipe\" \"${cmd_bcwipe}\"" >> ${dialog_file}
+	echo " \"workdir\" \"${workdir}\"" >> ${dialog_file}
+	echo " \"tmpdir\" \"${tmpdir}\"" >> ${dialog_file}
 	echo " \"taskdir\" \"${taskdir}\"" >> ${dialog_file}
-	echo " \"tmp_result\" \"${tmp_result}\"\\" >> ${dialog_file}
+	echo " \"tmp_result\" \"${tmp_result}\"" >> ${dialog_file}
 
-	echo " \"wiping_method\" `wiping_algorithm_description ${wiping_method}`\\" >> ${dialog_file}
-	echo " \"wiping_method_option\" \"${wiping_method_option}\"\\" >> ${dialog_file}
-	echo " \"wiping_pass\" \"${wiping_pass}\"\\" >> ${dialog_file}
-	echo " \"wiping_scheme_file\" \"${wiping_scheme_file}\"\\" >> ${dialog_file}
+	echo " \"wiping_method\" `wiping_algorithm_description ${wiping_method}`" >> ${dialog_file}
+	echo " \"wiping_method_option\" \"${wiping_method_option}\"" >> ${dialog_file}
+	echo " \"wiping_pass\" \"${wiping_pass}\"" >> ${dialog_file}
+	echo " \"wiping_scheme_file\" \"${wiping_scheme_file}\"" >> ${dialog_file}
 
 	dialog --file ${dialog_file} 2> ${tmp_result}
 }
@@ -296,9 +296,9 @@ menu_wiping_method () {
 	local	desc=''
 
 	cat <<EOM > ${dialog_file}
-    --radiolist \\
-    "wiping method" \\
-    0 0 0 \\
+ --radiolist
+ "wiping method"
+ 0 0 0
 EOM
 
 	for m in `wiping_algorithm_method ""`
@@ -306,9 +306,9 @@ EOM
 		desc=`wiping_algorithm_description ${m}`
 		echo -n " ${m} ${desc}" >> ${dialog_file}
 		if [ "X${wiping_method}" != "X${m}" ]; then
-			echo ' "off" \' >> ${dialog_file}
+			echo ' "off"' >> ${dialog_file}
 		else
-			echo ' "on" \' >> ${dialog_file}
+			echo ' "on"' >> ${dialog_file}
 		fi
 	done
 
@@ -348,12 +348,12 @@ menu_config () {
 	while : ;
 	do
 		cat <<EOM > ${dialog_file}
-    --menu \\
-    "environment values" \\
-    0 0 0 \\
-    "EXIT" "exit from system" \\
-    "SHOW" "show environe values" \\
-    "METHOD" "set wiping method" \\
+ --menu
+ "environment values"
+ 0 0 0
+ "EXIT" "exit from system"
+ "SHOW" "show environe values"
+ "METHOD" "set wiping method"
 EOM
 		dialog --file ${dialog_file} 2> ${tmp_result}
 
@@ -420,15 +420,15 @@ menu_wipe () {
 	local	geom_list=''
 
 	cat <<EOM > ${dialog_file}
-    --checklist \\
-    "wiping disks" \\
-    0 0 0 \\
+ --checklist
+ "wiping disks"
+ 0 0 0
 EOM
 
 	for d in `disk_names`
 	do
 		echo -n " ${d} \"`disk_desc ${d}`\"" >> ${dialog_file}
-		echo " \"off\" \\" >> ${dialog_file}
+		echo " \"off\"" >> ${dialog_file}
 	done
 
 	dialog --file ${dialog_file} 2> ${tmp_result}
@@ -461,14 +461,14 @@ menu_view_log () {
 	local	geom_list=''
 
 	cat <<EOM > ${dialog_file}
-    --menu \\
-    "wiping tasks" \\
-    0 0 0 \\
+ --menu
+ "wiping tasks"
+ 0 0 0
 EOM
 
 	for d in `disk_names`
 	do
-		echo -n " ${d} \"`disk_desc ${d}`\" \\" >> ${dialog_file}
+		echo -n " ${d} \"`disk_desc ${d}`\"" >> ${dialog_file}
 	done
 
 	dialog --file ${dialog_file} 2> ${tmp_result}
@@ -487,7 +487,7 @@ view_tasks () {
 	local	tpid=''
 
 	cat <<EOM > ${dialog_file}
-    --msgbox \\
+    --msgbox
 "
 EOM
 
@@ -505,7 +505,7 @@ EOM
 
 	cat <<EOM >> ${dialog_file}
 "
-    0 0 \\
+    0 0
 EOM
 
 	dialog --file ${dialog_file} 2> ${tmp_result}
@@ -518,12 +518,12 @@ menu_view () {
 	while : ;
 	do
 		cat <<EOM > ${dialog_file}
-    --menu \\
-    "main menu" \\
-    0 0 0 \\
-    "Exit" "Exit from system" \\
-    "Task" "show tasks" \\
-    "Log" "show task log" \\
+ --menu
+ "main menu"
+ 0 0 0
+ "Exit" "Exit from system"
+ "Task" "show tasks"
+ "Log" "show task log"
 EOM
 
 		dialog --file ${dialog_file} 2> ${tmp_result}
@@ -561,15 +561,16 @@ menu_top () {
 	while : ;
 	do
 		cat <<EOM > ${dialog_file}
-    --no-cancel \\
-    --menu \\
-    "main menu" \\
-    0 0 0 \\
-    "Wipe" "wipe whole disk" \\
-    "Config" "configuration" \\
-    "View" "view values" \\
-    "Shell" "exec external shell" \\
-    "Reboot" "reboot system" \\
+ --no-cancel
+ --menu
+ "main menu"
+ 0 0 0
+ "Exit" "Exit from system"
+ "Wipe" "wipe whole disk"
+ "Config" "configuration"
+ "View" "view values"
+ "Shell" "exec external shell"
+ "Reboot" "reboot system"
 EOM
 
 #    "Exit" "Exit from system" \\
