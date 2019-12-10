@@ -1,9 +1,9 @@
 #!/bin/sh
 
-#ISO_DOWNLOAD_URL=https://download.freebsd.org/ftp/releases/ISO-IMAGES/12.0
+#ISO_DOWNLOAD_URL=https://download.freebsd.org/ftp/releases/ISO-IMAGES/12.1
 
-MEMSTICK_IMG_RELEASE_12=FreeBSD-12.0-RELEASE-amd64-mini-memstick.img.xz
-MEMSTICK_IMG_DOWNLOAD_URL_RELEASE_12=https://download.freebsd.org/ftp/releases/ISO-IMAGES/12.0
+MEMSTICK_IMG_RELEASE_12=FreeBSD-12.1-RELEASE-amd64-mini-memstick.img.xz
+MEMSTICK_IMG_DOWNLOAD_URL_RELEASE_12=https://download.freebsd.org/ftp/releases/ISO-IMAGES/12.1
 
 MEMSTICK_IMG=${MEMSTICK_IMG:-${MEMSTICK_IMG_RELEASE_12}}
 MEMSTICK_IMG_DOWNLOAD_URL=${MEMSTICK_IMG_DOWNLOAD_URL:-${MEMSTICK_IMG_DOWNLOAD_URL_RELEASE_12}}
